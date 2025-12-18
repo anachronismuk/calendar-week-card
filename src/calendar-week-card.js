@@ -1659,7 +1659,7 @@ export class CalendarWeekCard extends HTMLElement {
             return Math.max(1, diffDays + 1);
         };
         const buildEventTitle = (ev) => {
-            const baseTitle = ev.isUntitled ? this.t("noTitle") : ev.title + " (@" + ev.location + ")";
+            const baseTitle = ev.isUntitled ? this.t("noTitle") : ev.title + this.t(" (@") + ev.location + this.t(")");
             if (!ev.daySpan || ev.daySpan <= 1) {
                 return baseTitle;
             }
@@ -2848,7 +2848,7 @@ export class CalendarWeekCard extends HTMLElement {
         content.addEventListener("click", e => e.stopPropagation());
 
         const title = document.createElement("h3");
-        const eventTitle = ev.isUntitled ? this.t("noTitle") : ev.title + " (@" + ev.location + ")";
+        const eventTitle = ev.isUntitled ? this.t("noTitle") : ev.title + this.t(" (@") + ev.location + this.t(")");
         title.textContent = eventTitle;
         Object.assign(title.style, { margin: 0, fontSize: "1.3em", color: "#333" });
         content.appendChild(title);
