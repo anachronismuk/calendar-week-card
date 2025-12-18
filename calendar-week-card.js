@@ -2186,7 +2186,7 @@ class CalendarWeekCard extends HTMLElement {
             return Math.max(1, diffDays + 1);
         };
         const buildEventTitle = (ev) => {
-            const baseTitle = ev.isUntitled ? this.t("noTitle") : ev.title;
+            const baseTitle = ev.isUntitled ? this.t("noTitle") : ev.title + " (@" + ev.location + ")";
             if (!ev.daySpan || ev.daySpan <= 1) {
                 return baseTitle;
             }
@@ -2305,7 +2305,7 @@ class CalendarWeekCard extends HTMLElement {
             const referenceDay = normalizeDay(dayStart);
 
             allDayEvents.forEach((ev, index) => {
-                const baseColor = this.config.colors[ev.calendar] || ev.color || "#4287f5";
+                const baseColor = this.config.colors[ev.calendar+"-"+ev.location] || this.config.colors[ev.location] || this.config.colors[ev.calendar] || ev.color || "#4287f5";
                 const gradientStart = this.mixColor(baseColor, "#000000", 0.18) || baseColor;
                 const gradientEnd = this.mixColor(baseColor, "#ffffff", 0.45) || baseColor;
                 const top = index * allDayRowStep;
@@ -2430,7 +2430,7 @@ class CalendarWeekCard extends HTMLElement {
                 eventDiv.style.left = `${leftIndent}px`;
                 eventDiv.style.right = `${rightIndent}px`;
 
-                const baseColor = this.config.colors[ev.calendar] || ev.color || "#4287f5";
+                const baseColor = this.config.colors[ev.calendar+"-"+ev.location] || this.config.colors[ev.location] || this.config.colors[ev.calendar] || ev.color || "#4287f5";
                 const gradientStart = this.mixColor(baseColor, "#000000", 0.2) || baseColor;
                 const gradientEnd = this.mixColor(baseColor, "#ffffff", 0.3) || baseColor;
                 eventDiv.style.background = `linear-gradient(160deg, ${gradientStart}, ${gradientEnd})`;
@@ -3375,7 +3375,7 @@ class CalendarWeekCard extends HTMLElement {
         content.addEventListener("click", e => e.stopPropagation());
 
         const title = document.createElement("h3");
-        const eventTitle = ev.isUntitled ? this.t("noTitle") : ev.title;
+        const eventTitle = ev.isUntitled ? this.t("noTitle") : ev.title + " (@" + ev.location + ")";
         title.textContent = eventTitle;
         Object.assign(title.style, { margin: 0, fontSize: "1.3em", color: "#333" });
         content.appendChild(title);
