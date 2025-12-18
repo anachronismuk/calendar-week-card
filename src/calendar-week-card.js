@@ -1778,7 +1778,7 @@ export class CalendarWeekCard extends HTMLElement {
             const referenceDay = normalizeDay(dayStart);
 
             allDayEvents.forEach((ev, index) => {
-                const baseColor = this.config.colors[ev.calendar] || ev.color || "#4287f5";
+                const baseColor = this.config.colors[ev.calendar] || this.config.colors[ev.calendar+"-"+ev.location] ||  ev.color || "#4287f5";
                 const gradientStart = this.mixColor(baseColor, "#000000", 0.18) || baseColor;
                 const gradientEnd = this.mixColor(baseColor, "#ffffff", 0.45) || baseColor;
                 const top = index * allDayRowStep;
@@ -1903,7 +1903,7 @@ export class CalendarWeekCard extends HTMLElement {
                 eventDiv.style.left = `${leftIndent}px`;
                 eventDiv.style.right = `${rightIndent}px`;
 
-                const baseColor = this.config.colors[ev.calendar] || ev.color || "#4287f5";
+                const baseColor = this.config.colors[ev.calendar] || this.config.colors[ev.calendar+"-"+ev.location] || ev.color || "#4287f5";
                 const gradientStart = this.mixColor(baseColor, "#000000", 0.2) || baseColor;
                 const gradientEnd = this.mixColor(baseColor, "#ffffff", 0.3) || baseColor;
                 eventDiv.style.background = `linear-gradient(160deg, ${gradientStart}, ${gradientEnd})`;
