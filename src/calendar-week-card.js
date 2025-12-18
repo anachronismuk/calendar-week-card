@@ -1659,7 +1659,7 @@ export class CalendarWeekCard extends HTMLElement {
             return Math.max(1, diffDays + 1);
         };
         const buildEventTitle = (ev) => {
-            const baseTitle = ev.isUntitled ? this.t("noTitle") : ev.title;
+            const baseTitle = ev.isUntitled ? this.t("noTitle") : ev.title+" (@"+ev.location+")";
             if (!ev.daySpan || ev.daySpan <= 1) {
                 return baseTitle;
             }
